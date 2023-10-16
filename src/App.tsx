@@ -1,34 +1,90 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BuildRoulette } from './BuildRoulette'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([])
+  const [selectedRace, setSelectedRace] = useState('')
+  const [numClasses, setNumClasses] = useState(1)
 
+  function Dropdown({ numClasses }: { numClasses: number }) {
+    const [selectedValue, setSelectedValue] = useState(numClasses.toString());
+  
+    const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedValue(event.target.value);
+      setNumClasses(parseInt(event.target.value));
+    };
+  
+    return (
+      <select
+        className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:ring focus:ring-gray-200 dark:focus:ring-gray-700 focus:ring-opacity-50 dark:focus:ring-opacity-50 py-1 px-2" 
+        onChange={handleSelectChange}
+        style={{ margin: "10px" }}
+        value={selectedValue}
+      >
+        {Array.from({ length: 12 }, (_, i) => i + 1).map((value) => (
+          <option key={value} value={value.toString()}>
+            {value}
+          </option>
+        ))}
+      </select>
+    );
+  }
+
+  function handleClassChange(buildClass: string[]) {
+    setSelectedClasses(buildClass)
+  }
+
+  function handleRaceChange(buildRace: string) {
+    setSelectedRace(buildRace)
+  }
+
+  function handleBuild() {
+    const buildRoulette = new BuildRoulette(numClasses)
+    buildRoulette.roll()
+    const classes: string[] = buildRoulette.getClasses()
+    const race: string = buildRoulette.getRace()
+    handleClassChange(classes)
+    handleRaceChange(race)
+  }
+  
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <div className="fixed top-0 w-full text-center bg-gray-800 dark:bg-black text-white p-4 text-2xl font-custom">
+        Baldur's Gate 3 Build Randomizer
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg">
+          <h1 className="text-2xl font-semibold text-center">Character Sheet</h1>
+          <div className="mt-4">
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Race:</label>
+              <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">{selectedRace}</p>
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Classes:</label>
+              <ul>
+                {selectedClasses.map((buildClass, index) => (
+                  <li key={index} className="text-lg font-semibold text-gray-800 dark:text-gray-200">{buildClass}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Number of Classes:</label>
+              <Dropdown numClasses={numClasses} />
+            </div>
+          </div>
+          <div className="mt-6">
+            <button
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-500 dark:bg-blue-700 rounded-md hover:bg-blue-600 dark:hover-bg-blue-800 focus:outline-none focus:ring focus:ring-blue-300 dark:focus:ring-blue-700 focus:ring-opacity-50 dark:focus:ring-opacity-50"
+              onClick={handleBuild}
+            >
+              Generate Character
+            </button>
+          </div>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
