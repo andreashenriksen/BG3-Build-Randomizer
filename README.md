@@ -1,27 +1,11 @@
-# React + TypeScript + Vite
+# Baldur's Gate 3 Build Randomizer
+This is a build randomizer I've made for Baldur's Gate 3 to add interesting challenges to the game where you try to make a build work with the build this randomizer gives you.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I also made this site as a project to improve my frontend skills with, and built it using vite and react.
 
-Currently, two official plugins are available:
+## How it works
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a pretty simple randomizer where you choose the amounts of classes you want to be included into your build from the dropdown menu, and then click the `Generate Build` button to generate your build and get the race and classes for it.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Author
+[Andreas Henriksen](https://github.com/andreashenriksen)
