@@ -17,7 +17,7 @@ function App() {
   
     return (
       <select
-        className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:ring focus:ring-gray-200 dark:focus:ring-gray-700 focus:ring-opacity-50 dark:focus:ring-opacity-50 py-1 px-2" 
+        className="bg-gray-800 border-gray-700 rounded-md shadow-sm hover:ring-gray-700 focus:ring focus:ring-gray-700 focus:ring-opacity-50 py-1 px-2" 
         onChange={handleSelectChange}
         style={{ margin: "10px" }}
         value={selectedValue}
@@ -50,33 +50,33 @@ function App() {
   
   return (
     <div>
-      <div className="fixed top-0 w-full text-center bg-gray-800 dark:bg-black text-white p-4 text-2xl font-custom">
+      <div className="fixed top-0 w-full text-center bg-gradient-to-b from-black via-black text-white p-4 text-2xl font-custom">
         Baldur's Gate 3 Build Randomizer
       </div>
       <div className="flex justify-center items-center min-h-screen">
-        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg">
-          <h1 className="text-2xl font-semibold text-center">Character Sheet</h1>
+        <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+          <h1 className="text-2xl font-bold text-center">Build</h1>
           <div className="mt-4">
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Race:</label>
-              <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">{selectedRace}</p>
+              <label className="block text-xl font-bold text-gray-300">Race:</label>
+              <p className="text-lg text-gray-200">{selectedRace}</p>
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Classes:</label>
+              <label className="block text-xl font-bold text-gray-300">Classes:</label>
               <ul>
                 {selectedClasses.map((buildClass, index) => (
-                  <li key={index} className="text-lg font-semibold text-gray-800 dark:text-gray-200">{buildClass}</li>
+                  <li key={index} className="text-lg text-gray-200">{buildClass}</li>
                 ))}
               </ul>
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Number of Classes:</label>
+              <label className="block text-sm font-semibold text-gray-300">Number of Classes:</label>
               <Dropdown numClasses={numClasses} />
             </div>
           </div>
           <div className="mt-6">
             <button
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-500 dark:bg-blue-700 rounded-md hover:bg-blue-600 dark:hover-bg-blue-800 focus:outline-none focus:ring focus:ring-blue-300 dark:focus:ring-blue-700 focus:ring-opacity-50 dark:focus:ring-opacity-50"
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-700 focus:ring-opacity-50"
               onClick={handleBuild}
             >
               Generate Character
