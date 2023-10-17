@@ -1,17 +1,11 @@
-interface Classes {
-    [key: string]: number[]; // [current level, max level]
-}
+import { BG3Classes } from './BG3Classes';
 
-interface SubClasses {
-    [key: string]: string[]; 
-}
-
-interface Races {
-    [key: string]: string[];
+interface ClassLevels {
+    [key: string]: number[];
 }
 
 const MAX_LEVEL = 12;
-const ALL_CLASSES: Classes = {
+const CLASS_LEVELS: ClassLevels = {
     Barbarian: [0, 3],
     Bard: [0, 3],
     Cleric: [0, 1],
@@ -25,72 +19,43 @@ const ALL_CLASSES: Classes = {
     Warlock: [0, 1],
     Wizard: [0, 2]
 }
-const SUB_CLASSES: SubClasses = {
-    Barbarian: ["Berserker", "Wildheart", "Wild Magic"],
-    Bard: ["College of Lore", "College of Valor", "College of Swords"],
-    Cleric: ["Life", "Light", "Trickery", "Knowledge", "Nature", "Tempest", "War"],
-    Druid: ["Circle of the Land", "Circle of the Moon", "Circle of the Spores"],
-    Fighter: ["Battle Master", "Eldritch Knight", "Champion"],
-    Monk: ["Way of the Four Elements", "Way of the Open Hand", "Way of Shadow"],
-    Paladin: ["Oath of the Ancients", "Oath of Devotion ", "Oath of Vengeance"],
-    Ranger: ["Hunter", "Beast Master", "Gloom Stalker"],
-    Rogue: ["Arcane Trickster", "Thief", "Assassin"],
-    Sorcerer: ["Wild Magic", "Draconic Bloodline", "Storm Sorcery"],
-    Warlock: ["The Fiend", "The Great Old One", "The Archfey"],
-    Wizard: ["Abjuration School", "Conjuration School", "Divination School", "Enchantment School", "Evocation School", 
-    "Illusion School", "Necromancy School", "Transmutation School"]
-}
-
-const ALL_RACES: Races = {
-    Human: ["Human"],
-    Elf: ["High Elf", "Wood Elf"],
-    Drow: ["Lolth-Sworn Drow", "Seldarine Drow"],
-    HalfElf: ["High Half-Elf", "Wood Half-Elf", "Drow Half-Elf"],
-    HalfOrc: ["Half-Orc"],
-    Halfling: ["Lightfoot Halfling", "Strongheart Halfling"],
-    Dwarf: ["Gold Dwarf", "Shield Dwarf", "Duergar"],
-    Gnome: ["Forest Gnome", "Deep Gnome", "Rock Gnome"],
-    Tiefling: ["Asmodeus Tiefling", "Mephistopheles Tiefling", "Zariel Tiefling"],
-    Githyanki: ["Githyanki"],
-    Dragonborn: ["Black Dragonborn", "Blue Dragonborn", "Brass Dragonborn", "Bronze Dragonborn", "Copper Dragonborn", 
-    "Gold Dragonborn", "Green Dragonborn", "Red Dragonborn", "Silver Dragonborn", "White Dragonborn"]
-}
-
 
 export class BuildRoulette {
     numClasses: number;
-    classes: string[];
-    race: string;
+    selectedClasses: string[];
+    selectedRace: string;
+    BG3Classes: BG3Classes;
 
     constructor(numClasses: number) {
         this.numClasses = numClasses;
-        this.classes = [];
-        this.race = "";
+        this.selectedClasses = [];
+        this.selectedRace = "";
+        this.BG3Classes = new BG3Classes();
     }
 
-    getClasses(): string[] {
-        return this.classes;
+    getSelectedClasses(): string[] {
+        return this.selectedClasses;
     }
 
     addClass(new_class: string): void {
-        this.classes.push(new_class);
+        this.selectedClasses.push(new_class);
     }
 
     chooseClasses(): void {
         // Roll classes randomly from the list of all classes
         for (let i = 0; i < this.numClasses; i++) {
-            let index = Math.floor(Math.random() * Object.keys(ALL_CLASSES).length);
-            while (this.classes.includes(Object.keys(ALL_CLASSES)[index])) {
-                index = Math.floor(Math.random() * Object.keys(ALL_CLASSES).length);
+            let index = Math.floor(Math.random() * this.BG3Classes.getClassesLength());
+            while (this.selectedClasses.includes(this.BG3Classes.getClasses()[index])) {
+                index = Math.floor(Math.random() * this.BG3Classes.getClassesLength());
             }
-            this.addClass(Object.keys(ALL_CLASSES)[index]);
+            this.addClass(this.BG3Classes.getClasses()[index]);
         }
     }
 
     resetClassLevels(): void {
-        // Reset ALL_CLASSES object
-        Object.keys(ALL_CLASSES).forEach((key) => {
-            ALL_CLASSES[key][0] = 0;
+        // Reset CLASS_LEVELS object
+        this.BG3Classes.getClasses().forEach((key) => {
+            CLASS_LEVELS[key][0] = 0;
         });
     }
 
@@ -100,8 +65,8 @@ export class BuildRoulette {
         let remainingLevels = MAX_LEVEL
     
         // Give each class 1 level to start with
-        this.classes.forEach((value: string) => {
-            ALL_CLASSES[value][0] += 1;
+        this.selectedClasses.forEach((value: string) => {
+            CLASS_LEVELS[value][0] += 1;
             remainingLevels--;
         })
     
@@ -109,39 +74,39 @@ export class BuildRoulette {
         while (remainingLevels > 0) {
             // Choose a random number of levels to add to a random class
             const randomClassIndex = Math.floor(Math.random() * this.numClasses);
-            const randomClass = this.classes[randomClassIndex];
+            const randomClass = this.selectedClasses[randomClassIndex];
             const numLevels = Math.floor(Math.random() * remainingLevels) + 1;
 
             // Add the levels to the class
-            ALL_CLASSES[randomClass][0] += numLevels;
+            CLASS_LEVELS[randomClass][0] += numLevels;
             remainingLevels -= numLevels;
         }
 
-        // Add the levels from ALL_CLASSES to this.classes
-        this.classes.forEach((value: string) => {
-            const numLevels = ALL_CLASSES[value][0];
-            const index = this.classes.indexOf(value);
-            if (ALL_CLASSES[value][0] >= ALL_CLASSES[value][1]) {
-                const subClassIndex = Math.floor(Math.random() * SUB_CLASSES[value].length);
-                this.classes[this.classes.indexOf(value)] += " (" + SUB_CLASSES[value][subClassIndex] + ")";
+        // Add the levels from CLASS_LEVELS to this.classes
+        this.selectedClasses.forEach((value: string) => {
+            const numLevels = CLASS_LEVELS[value][0];
+            const index = this.selectedClasses.indexOf(value);
+            if (CLASS_LEVELS[value][0] >= CLASS_LEVELS[value][1]) {
+                const subClassIndex = Math.floor(Math.random() * this.BG3Classes.getSubClassesLength(value));
+                this.selectedClasses[this.selectedClasses.indexOf(value)] += " (" + this.BG3Classes.getSubClasses(value)[subClassIndex] + ")";
             }
-            this.classes[index] += ": " + numLevels.toString();            
+            this.selectedClasses[index] += ": " + numLevels.toString();            
         })
     }
 
     chooseRace(): void {
         // Choose a random race from the list of race and subraces
-        this.race = "";
-        let index = Math.floor(Math.random() * Object.keys(ALL_RACES).length);
-        const chosenRace = Object.keys(ALL_RACES)[index];
+        this.selectedRace = "";
+        let index = Math.floor(Math.random() * this.BG3Classes.getRacesLength());
+        const chosenRace = this.BG3Classes.getRaces()[index];
 
-        const numSubRaces = ALL_RACES[chosenRace].length;
+        const numSubRaces = this.BG3Classes.getSubRacesLength(chosenRace);
         index = Math.floor(Math.random() * numSubRaces);
-        this.race = ALL_RACES[chosenRace][index];
+        this.selectedRace = this.BG3Classes.getSubRaces(chosenRace)[index];
     }
 
     getRace(): string {
-        return this.race;
+        return this.selectedRace;
     }
 
 
