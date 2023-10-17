@@ -87,7 +87,7 @@ function App() {
               <div className="flex items-center w-max gap-2 ml-16">
                 <img
                   src={selectedRacePicture}
-                  className="h-[100px] w-[100px]"
+                  className="h-[100px]"
                 />
                 <p className="text-4xl text-gray-200">{selectedRace}</p>
               </div>
