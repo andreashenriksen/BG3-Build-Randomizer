@@ -29,32 +29,32 @@ const CLASS_LEVELS: ClassLevels = {
 }
 
 const RACE_PICTURES: RacePictures = {
-    Human: 'race_pictures/Race_Human.png',
-    Elf: 'race_pictures/Race_Elf.png',
-    Drow: 'race_pictures/Race_Drow.png',
-    HalfElf: 'race_pictures/Race_Half-Elf.png',
-    HalfOrc: 'race_pictures/Race_Half-Orc.png',
-    Halfling: 'race_pictures/Race_Halfling.png',
-    Dwarf: 'race_pictures/Race_Dwarf.png',
-    Gnome: 'race_pictures/Race_Gnome.png',
-    Tiefling: 'race_pictures/Race_Tiefling.png',
-    Githyanki: 'race_pictures/Race_Githyanki.png',
-    Dragonborn: 'race_pictures/Race_Dragonborn.png'
+    Human: '/race_pictures/Race_Human.png',
+    Elf: '/race_pictures/Race_Elf.png',
+    Drow: '/race_pictures/Race_Drow.png',
+    HalfElf: '/race_pictures/Race_Half-Elf.png',
+    HalfOrc: '/race_pictures/Race_Half-Orc.png',
+    Halfling: '/race_pictures/Race_Halfling.png',
+    Dwarf: '/race_pictures/Race_Dwarf.png',
+    Gnome: '/race_pictures/Race_Gnome.png',
+    Tiefling: '/race_pictures/Race_Tiefling.png',
+    Githyanki: '/race_pictures/Race_Githyanki.png',
+    Dragonborn: '/race_pictures/Race_Dragonborn.png'
 }
 
 const CLASS_PICTURES: ClassPictures = {
-    Barbarian: 'class_pictures/Class_Barbarian.png',
-    Bard: 'class_pictures/Class_Bard.png',
-    Cleric: 'class_pictures/Class_Cleric.png',
-    Druid: 'class_pictures/Class_Druid.png',
-    Fighter: 'class_pictures/Class_Fighter.png',
-    Monk: 'class_pictures/Class_Monk.png',
-    Paladin: 'class_pictures/Class_Paladin.png',
-    Ranger: 'class_pictures/Class_Ranger.png',
-    Rogue: 'class_pictures/Class_Rogue.png',
-    Sorcerer: 'class_pictures/Class_Sorcerer.png',
-    Warlock: 'class_pictures/Class_Warlock.png',
-    Wizard: 'class_pictures/Class_Wizard.png'
+    Barbarian: '/class_pictures/Class_Barbarian.png',
+    Bard: '/class_pictures/Class_Bard.png',
+    Cleric: '/class_pictures/Class_Cleric.png',
+    Druid: '/class_pictures/Class_Druid.png',
+    Fighter: '/class_pictures/Class_Fighter.png',
+    Monk: '/class_pictures/Class_Monk.png',
+    Paladin: '/class_pictures/Class_Paladin.png',
+    Ranger: '/class_pictures/Class_Ranger.png',
+    Rogue: '/class_pictures/Class_Rogue.png',
+    Sorcerer: '/class_pictures/Class_Sorcerer.png',
+    Warlock: '/class_pictures/Class_Warlock.png',
+    Wizard: '/class_pictures/Class_Wizard.png'
 }
 
 export class BuildRoulette {

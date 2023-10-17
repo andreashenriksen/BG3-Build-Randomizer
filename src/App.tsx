@@ -100,26 +100,29 @@ function App() {
                 {selectedClasses.map((buildClass, index) => (
                   <li
                     key={index}
-                    className={`text-lg text-gray-200 list-image-[url(${selectedClassIcons[index]})]`}
+                    className='text-lg text-gray-200'
                   >
+                    <img className="inline-block align-middle" src={selectedClassIcons[index]}/>
                     {buildClass}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="mb-4">
-              <label className="block text-sm font-semibold text-gray-300">
-                Number of Classes:
-              </label>
-              <Dropdown numClasses={numClasses} />
-            </div>
-            <div className="mt-6">
-              <button
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-700 focus:ring-opacity-50"
-                onClick={handleBuild}
-              >
-                Generate Character
-              </button>
+            <div className="mt-[55px]">
+              <div>
+                <label className="block text-sm font-semibold text-gray-300">
+                  Number of Classes:
+                </label>
+                <Dropdown numClasses={numClasses} />
+              </div>
+              <div>
+                <button
+                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-700 focus:ring-opacity-50"
+                  onClick={handleBuild}
+                >
+                  Generate Character
+                </button>
+              </div>
             </div>
           </div>
         </div>
