@@ -22,7 +22,7 @@ function App() {
         style={{ margin: "10px" }}
         value={selectedValue}
       >
-        {Array.from({ length: 12 }, (_, i) => i + 1).map((value) => (
+        {Array.from({ length: 12 }, (_, i) => i + 1).map((value) => ( // Create an array of numbers from 1 to 12 and map them to HTML options
           <option key={value} value={value.toString()}>
             {value}
           </option>
@@ -42,7 +42,7 @@ function App() {
   function handleBuild() {
     const buildRoulette = new BuildRoulette(numClasses)
     buildRoulette.roll()
-    const classes: string[] = buildRoulette.getClasses()
+    const classes: string[] = buildRoulette.getSelectedClasses()
     const race: string = buildRoulette.getRace()
     handleClassChange(classes)
     handleRaceChange(race)
@@ -54,14 +54,14 @@ function App() {
         Baldur's Gate 3 Build Randomizer
       </div>
       <div className="flex justify-center items-center min-h-screen">
-        <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+        <div className="flex-grow bg-gray-800 p-4 rounded-lg shadow-lg" style={{ maxWidth: '24rem', maxHeight: '663px', height: '663px'}}>
           <h1 className="text-2xl font-bold text-center">Build</h1>
           <div className="mt-4">
             <div className="mb-4">
               <label className="block text-xl font-bold text-gray-300">Race:</label>
-              <p className="text-lg text-gray-200">{selectedRace}</p>
+              <p className="text-lg text-gray-200" style={{ height: '22px'}}>{selectedRace}</p>
             </div>
-            <div className="mb-4">
+            <div className="mb-4" style={{ height: '364px'}}>
               <label className="block text-xl font-bold text-gray-300">Classes:</label>
               <ul>
                 {selectedClasses.map((buildClass, index) => (
@@ -73,14 +73,14 @@ function App() {
               <label className="block text-sm font-semibold text-gray-300">Number of Classes:</label>
               <Dropdown numClasses={numClasses} />
             </div>
-          </div>
-          <div className="mt-6">
-            <button
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-700 focus:ring-opacity-50"
-              onClick={handleBuild}
-            >
-              Generate Character
-            </button>
+            <div className="mt-6">
+              <button
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-700 focus:ring-opacity-50"
+                onClick={handleBuild}
+              >
+                Generate Character
+              </button>
+            </div>
           </div>
         </div>
       </div>
