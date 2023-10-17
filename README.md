@@ -8,4 +8,4 @@ I also made this site as a project to improve my frontend skills with, and built
 This is a pretty simple randomizer where you choose the amounts of classes you want to be included into your build from the dropdown menu, and then click the `Generate Build` button to generate your build and get the race and classes for it.
 
 ## Author
-Andreas Søland Henriksen - [andreashenriksen](https://github.com/andreashenriksen)
+Andreas Henriksen - [andreashenriksen](https://github.com/andreashenriksen)
