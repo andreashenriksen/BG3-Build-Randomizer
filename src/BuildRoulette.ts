@@ -4,6 +4,14 @@ interface ClassLevels {
     [key: string]: number[];
 }
 
+interface RacePictures {
+    [key: string]: string;
+}
+
+interface ClassPictures {
+    [key: string]: string;
+}
+
 const MAX_LEVEL = 12;
 const CLASS_LEVELS: ClassLevels = {
     Barbarian: [0, 3],
@@ -20,21 +28,58 @@ const CLASS_LEVELS: ClassLevels = {
     Wizard: [0, 2]
 }
 
+const RACE_PICTURES: RacePictures = {
+    Human: 'race_pictures/Race_Human.png',
+    Elf: 'race_pictures/Race_Elf.png',
+    Drow: 'race_pictures/Race_Drow.png',
+    HalfElf: 'race_pictures/Race_Half-Elf.png',
+    HalfOrc: 'race_pictures/Race_Half-Orc.png',
+    Halfling: 'race_pictures/Race_Halfling.png',
+    Dwarf: 'race_pictures/Race_Dwarf.png',
+    Gnome: 'race_pictures/Race_Gnome.png',
+    Tiefling: 'race_pictures/Race_Tiefling.png',
+    Githyanki: 'race_pictures/Race_Githyanki.png',
+    Dragonborn: 'race_pictures/Race_Dragonborn.png'
+}
+
+const CLASS_PICTURES: ClassPictures = {
+    Barbarian: 'class_pictures/Class_Barbarian.png',
+    Bard: 'class_pictures/Class_Bard.png',
+    Cleric: 'class_pictures/Class_Cleric.png',
+    Druid: 'class_pictures/Class_Druid.png',
+    Fighter: 'class_pictures/Class_Fighter.png',
+    Monk: 'class_pictures/Class_Monk.png',
+    Paladin: 'class_pictures/Class_Paladin.png',
+    Ranger: 'class_pictures/Class_Ranger.png',
+    Rogue: 'class_pictures/Class_Rogue.png',
+    Sorcerer: 'class_pictures/Class_Sorcerer.png',
+    Warlock: 'class_pictures/Class_Warlock.png',
+    Wizard: 'class_pictures/Class_Wizard.png'
+}
+
 export class BuildRoulette {
     numClasses: number;
     selectedClasses: string[];
+    selectedClassIcons: string[];
     selectedRace: string;
+    selectedSubRace: string;
     BG3Classes: BG3Classes;
 
     constructor(numClasses: number) {
         this.numClasses = numClasses;
         this.selectedClasses = [];
+        this.selectedClassIcons = [];
         this.selectedRace = "";
+        this.selectedSubRace = "";
         this.BG3Classes = new BG3Classes();
     }
 
     getSelectedClasses(): string[] {
         return this.selectedClasses;
+    }
+
+    getClassPictures(): string[] {
+        return this.selectedClassIcons;
     }
 
     addClass(new_class: string): void {
@@ -82,8 +127,9 @@ export class BuildRoulette {
             remainingLevels -= numLevels;
         }
 
-        // Add the levels from CLASS_LEVELS to this.classes
+        // Add the levels from CLASS_LEVELS to this.classes and add class icons to this.classIcons
         this.selectedClasses.forEach((value: string) => {
+            this.selectedClassIcons.push(CLASS_PICTURES[value]);
             const numLevels = CLASS_LEVELS[value][0];
             const index = this.selectedClasses.indexOf(value);
             if (CLASS_LEVELS[value][0] >= CLASS_LEVELS[value][1]) {
@@ -98,18 +144,20 @@ export class BuildRoulette {
         // Choose a random race from the list of race and subraces
         this.selectedRace = "";
         let index = Math.floor(Math.random() * this.BG3Classes.getRacesLength());
-        const chosenRace = this.BG3Classes.getRaces()[index];
+        this.selectedRace = this.BG3Classes.getRaces()[index];
 
-        const numSubRaces = this.BG3Classes.getSubRacesLength(chosenRace);
+        const numSubRaces = this.BG3Classes.getSubRacesLength(this.selectedRace);
         index = Math.floor(Math.random() * numSubRaces);
-        this.selectedRace = this.BG3Classes.getSubRaces(chosenRace)[index];
+        this.selectedSubRace = this.BG3Classes.getSubRaces(this.selectedRace)[index];
     }
 
     getRace(): string {
-        return this.selectedRace;
+        return this.selectedSubRace;
     }
 
-
+    getRacePicture(): string {
+        return RACE_PICTURES[this.selectedRace];
+    }
 
     roll(): void {
         this.chooseRace();
