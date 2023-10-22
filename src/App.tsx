@@ -21,9 +21,8 @@ function App() {
 
     return (
       <select
-        className="bg-gray-800 border-gray-700 rounded-md shadow-sm hover:ring-gray-700 focus:ring focus:ring-gray-700 focus:ring-opacity-50 py-1 px-2"
+        className="max-sm:text-sm bg-gray-800 border-gray-700 rounded-md shadow-sm hover:ring-gray-700 focus:ring focus:ring-gray-700 focus:ring-opacity-50 py-1 m-[10px]"
         onChange={handleSelectChange}
-        style={{ margin: "10px" }}
         value={selectedValue}
       >
         {Array.from({ length: 12 }, (_, i) => i + 1).map(
@@ -70,39 +69,35 @@ function App() {
 
   return (
     <div>
-      <div className="fixed top-0 w-full text-center bg-gradient-to-b from-black via-black text-white p-4 text-2xl font-custom">
+      <div className="top-0 w-full text-center bg-gradient-to-b from-black via-black text-white p-4 text-2xl font-custom">
         Baldur's Gate 3 Build Randomizer
       </div>
-      <div className="flex justify-center items-center min-h-screen">
-        <div
-          className="flex-grow bg-gray-800 p-4 rounded-lg shadow-lg"
-          style={{ maxWidth: "40rem", maxHeight: "800px", height: "750px" }}
-        >
-          <h1 className="text-2xl font-bold text-center">Build</h1>
+      <div className="flex justify-center min-h-screen">
+        <div className="flex-grow bg-gray-800 p-4 rounded-lg shadow-lg max-sm:max-w-xs md:max-w-[40rem] h-fit">
           <div className="mt-4">
-            <div className="mb-4">
-              <label className="block text-xl font-bold text-gray-300">
+            <div className="max-sm:mb-2 mb-4">
+              <label className="block max-sm:text-sm text-xl font-bold text-gray-300">
                 Race:
               </label>
-              <div className="flex items-center w-max gap-2 ml-16">
+              <div className="flex items-center w-max gap-2 md:ml-16">
                 <img
                   src={selectedRacePicture}
-                  className="h-[100px]"
+                  className="md:h-24 h-12"
                 />
-                <p className="text-4xl text-gray-200">{selectedRace}</p>
+                <p className="md:text-4xl text-gray-200">{selectedRace}</p>
               </div>
             </div>
-            <div className="mb-4" style={{ height: "364px" }}>
-              <label className="block text-xl font-bold text-gray-300">
+            <div className="mb-4 max-sm:h-[270px] md:h-[364px]">
+              <label className="block max-sm:text-sm text-xl font-bold text-gray-300">
                 Classes:
               </label>
               <ul>
                 {selectedClasses.map((buildClass, index) => (
                   <li
                     key={index}
-                    className='text-lg text-gray-200'
+                    className='md:text-lg text-sm text-gray-200'
                   >
-                    <img className="inline-block align-middle" src={selectedClassIcons[index]}/>
+                    <img className="max-sm:w-6 inline-block align-middle" src={selectedClassIcons[index]}/>
                     {buildClass}
                   </li>
                 ))}
@@ -110,14 +105,14 @@ function App() {
             </div>
             <div className="mt-[55px]">
               <div>
-                <label className="block text-sm font-semibold text-gray-300">
+                <label className="block max-sm:text-xs text-sm font-semibold text-gray-300">
                   Number of Classes:
                 </label>
                 <Dropdown numClasses={numClasses} />
               </div>
               <div>
                 <button
-                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-700 focus:ring-opacity-50"
+                  className="px-4 py-2 max-sm:text-xs text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-700 focus:ring-opacity-50"
                   onClick={handleBuild}
                 >
                   Generate Character
