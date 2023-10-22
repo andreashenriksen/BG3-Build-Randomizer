@@ -21,7 +21,7 @@ function App() {
 
     return (
       <select
-        className="max-sm:text-sm bg-gray-800 border-gray-700 rounded-md shadow-sm hover:ring-gray-700 focus:ring focus:ring-gray-700 focus:ring-opacity-50 py-1 m-[10px]"
+        className="max-lg:text-sm bg-gray-800 border-gray-700 rounded-md shadow-sm hover:ring-gray-700 focus:ring focus:ring-gray-700 focus:ring-opacity-50 py-1 m-[10px]"
         onChange={handleSelectChange}
         value={selectedValue}
       >
@@ -79,10 +79,10 @@ function App() {
               <label className="block text-sm lg:text-xl font-bold text-gray-300">
                 Race:
               </label>
-              <div className="flex items-center w-max gap-2 md:ml-16">
+              <div className="flex items-center w-max gap-2 lg:ml-16">
                 <img
                   src={selectedRacePicture}
-                  className="md:h-24 h-12"
+                  className="lg:h-24 h-12"
                 />
                 <p className="lg:text-4xl text-gray-200">{selectedRace}</p>
               </div>
@@ -95,9 +95,9 @@ function App() {
                 {selectedClasses.map((buildClass, index) => (
                   <li
                     key={index}
-                    className='text-sm md:text-lg text-gray-200'
+                    className='text-sm lg:text-lg text-gray-200'
                   >
-                    <img className="max-md:w-6 inline-block align-middle" src={selectedClassIcons[index]}/>
+                    <img className="max-lg:w-6 inline-block align-middle" src={selectedClassIcons[index]}/>
                     {buildClass}
                   </li>
                 ))}
